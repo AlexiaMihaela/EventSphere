@@ -8,6 +8,7 @@ import org.example.repository.EventRepository;
 import org.example.repository.SessionRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -45,7 +46,8 @@ public class SessionService {
     }
 
 
-    public List<Session> getByEvent(Long eventId) {
-        return sessionRepository.findByEventId(eventId);
+    public List<SessionResponse> getByEvent(Long eventId) {
+        return sessionRepository.findSessionResponsesByEventId(eventId);
     }
+
 }

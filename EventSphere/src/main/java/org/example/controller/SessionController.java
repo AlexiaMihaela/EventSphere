@@ -26,7 +26,8 @@ public class SessionController {
 
 
     @GetMapping("/event/{eventId}")
-    public List<Session> byEvent(@PathVariable Long eventId) {
+    public List<SessionResponse> byEvent(@PathVariable Long eventId) {
         return sessionService.getByEvent(eventId);
     }
+
 }

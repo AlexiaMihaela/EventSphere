@@ -31,4 +31,10 @@ public class EventController {
     public List<Event> getEventsByLocation(@PathVariable String location) {
         return eventService.getEventsByLocation(location);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEvent(@PathVariable Long id) {
+        eventService.deleteEventCascade(id);
+    }
+
 }
