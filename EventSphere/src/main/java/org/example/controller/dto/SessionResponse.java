@@ -16,4 +16,8 @@ public class SessionResponse {
         this.capacity = capacity;
         this.eventId = eventId;
     }
+
+    public SessionResponse() {
+
+    }
 }

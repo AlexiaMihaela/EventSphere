@@ -40,7 +40,6 @@ public class SessionService {
         resp.startTime = saved.getStartTime();
         resp.capacity = saved.getCapacity();
         resp.eventId = event.getId();
-        resp.eventName = event.getName();
 
         return resp;
     }
