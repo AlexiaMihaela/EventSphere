@@ -4,16 +4,37 @@ import org.example.model.Event;
 import org.example.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
+import org.example.repository.EventRegistrationRepository;
+import org.example.repository.FeedbackRepository;
+import org.example.repository.SessionEnrollmentRepository;
+import org.example.repository.SessionRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Service
 public class EventService {
 
     private final EventRepository eventRepository;
 
-    public EventService(EventRepository eventRepository) {
+    private final SessionRepository sessionRepository;
+    private final EventRegistrationRepository registrationRepository;
+    private final SessionEnrollmentRepository enrollmentRepository;
+    private final FeedbackRepository feedbackRepository;
+
+    public EventService(EventRepository eventRepository,
+                        SessionRepository sessionRepository,
+                        EventRegistrationRepository registrationRepository,
+                        SessionEnrollmentRepository enrollmentRepository,
+                        FeedbackRepository feedbackRepository) {
         this.eventRepository = eventRepository;
+        this.sessionRepository = sessionRepository;
+        this.registrationRepository = registrationRepository;
+        this.enrollmentRepository = enrollmentRepository;
+        this.feedbackRepository = feedbackRepository;
     }
 
     public Event createEvent(Event event) {
@@ -27,4 +48,27 @@ public class EventService {
     public List<Event> getEventsByLocation(String location) {
         return eventRepository.findByLocationIgnoreCase(location);
     }
+
+    @Transactional
+    public void deleteEventCascade(Long eventId) {
+        // 1) check event exists
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found: " + eventId));
+
+        // 2) ia sessionIds
+        var sessionIds = sessionRepository.findSessionIdsByEventId(eventId);
+
+        // 3) sterge copii in ordinea corecta (FK safe)
+        if (!sessionIds.isEmpty()) {
+            feedbackRepository.deleteBySessionIds(sessionIds);
+            enrollmentRepository.deleteBySessionIds(sessionIds);
+        }
+
+        sessionRepository.deleteByEventId(eventId);
+        registrationRepository.deleteByEventId(eventId);
+
+        // 4) sterge event
+        eventRepository.delete(event);
+    }
+
 }
