@@ -1,4 +1,4 @@
-package org.example.controller.dto;
+package org.example.dto;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;

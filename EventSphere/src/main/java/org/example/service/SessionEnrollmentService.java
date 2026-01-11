@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.controller.dto.EnrollToSessionRequest;
+import org.example.dto.EnrollToSessionRequest;
 import org.example.model.Session;
 import org.example.model.SessionEnrollment;
 import org.example.model.User;

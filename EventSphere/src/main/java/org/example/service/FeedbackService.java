@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.controller.dto.AddFeedbackRequest;
+import org.example.dto.AddFeedbackRequest;
 import org.example.model.Feedback;
 import org.example.model.Session;
 import org.example.model.User;

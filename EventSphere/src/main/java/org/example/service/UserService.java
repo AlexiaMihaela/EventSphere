@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.controller.dto.CreateUserRequest;
+import org.example.dto.CreateUserRequest;
 import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.controller.dto.RegisterToEventRequest;
+import org.example.dto.RegisterToEventRequest;
 import org.example.model.Event;
 import org.example.model.EventRegistration;
 import org.example.model.User;

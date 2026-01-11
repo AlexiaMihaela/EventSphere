@@ -1,13 +1,13 @@
 package org.example.repository;
 
-import org.example.controller.dto.analytics.SessionAttendanceRow;
-import org.example.controller.dto.analytics.SessionPerformanceRow;
+import org.example.dto.analytics.SessionAttendanceRow;
+import org.example.dto.analytics.SessionPerformanceRow;
 import org.example.model.Session;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
-import org.example.controller.dto.SessionResponse;
+import org.example.dto.SessionResponse;
 
 
 

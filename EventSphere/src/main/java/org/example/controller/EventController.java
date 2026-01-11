@@ -37,4 +37,20 @@ public class EventController {
         eventService.deleteEventCascade(id);
     }
 
+    @GetMapping
+    public List<Event> getAllEvents() {
+        return eventService.getAllEvents();
+    }
+
+    @GetMapping("/{id}")
+    public Event getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Event updateEvent(@PathVariable Long id, @Valid @RequestBody Event event) {
+        return eventService.updateEvent(id, event);
+    }
+
+
 }

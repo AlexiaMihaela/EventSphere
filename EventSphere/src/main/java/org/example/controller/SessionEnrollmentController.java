@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
-import org.example.controller.dto.EnrollToSessionRequest;
+import org.example.dto.EnrollToSessionRequest;
 import org.example.model.SessionEnrollment;
 import org.example.service.SessionEnrollmentService;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
-import org.example.controller.dto.RegisterToEventRequest;
+import org.example.dto.RegisterToEventRequest;
 import org.example.model.EventRegistration;
 import org.example.service.EventRegistrationService;
 import org.springframework.web.bind.annotation.*;

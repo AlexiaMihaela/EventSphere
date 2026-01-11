@@ -1,8 +1,8 @@
 package org.example.controller;
 
-import org.example.controller.dto.analytics.OccupancyResponse;
-import org.example.controller.dto.analytics.SessionAttendanceRow;
-import org.example.controller.dto.analytics.SessionPerformanceRow;
+import org.example.dto.analytics.OccupancyResponse;
+import org.example.dto.analytics.SessionAttendanceRow;
+import org.example.dto.analytics.SessionPerformanceRow;
 import org.example.service.AnalyticsService;
 import org.springframework.web.bind.annotation.*;
 

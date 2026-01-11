@@ -1,4 +1,4 @@
-package org.example.controller.dto.analytics;
+package org.example.dto.analytics;
 
 public class OccupancyResponse {
     public Long eventId;

@@ -1,9 +1,8 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
-import org.example.controller.dto.CreateSessionRequest;
-import org.example.controller.dto.SessionResponse;
-import org.example.model.Session;
+import org.example.dto.CreateSessionRequest;
+import org.example.dto.SessionResponse;
 import org.example.service.SessionService;
 import org.springframework.web.bind.annotation.*;
 

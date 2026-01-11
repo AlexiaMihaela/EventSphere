@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
-import org.example.controller.dto.AddFeedbackRequest;
+import org.example.dto.AddFeedbackRequest;
 import org.example.model.Feedback;
 import org.example.service.FeedbackService;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package org.example.service;
 
-import org.example.controller.dto.analytics.OccupancyResponse;
-import org.example.controller.dto.analytics.SessionAttendanceRow;
-import org.example.controller.dto.analytics.SessionPerformanceRow;
+import org.example.dto.analytics.OccupancyResponse;
+import org.example.dto.analytics.SessionAttendanceRow;
+import org.example.dto.analytics.SessionPerformanceRow;
 import org.example.model.Event;
 import org.example.repository.EventRegistrationRepository;
 import org.example.repository.EventRepository;

@@ -1,4 +1,4 @@
-package org.example.controller.dto;
+package org.example.dto;
 
 import java.time.LocalDateTime;
 

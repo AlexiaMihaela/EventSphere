@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.controller.dto.CreateSessionRequest;
-import org.example.controller.dto.SessionResponse;
+import org.example.dto.CreateSessionRequest;
+import org.example.dto.SessionResponse;
 import org.example.model.Event;
 import org.example.model.Session;
 import org.example.repository.EventRepository;
