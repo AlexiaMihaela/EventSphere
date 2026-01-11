@@ -16,4 +16,9 @@ public interface EventRegistrationRepository extends JpaRepository<EventRegistra
     int deleteByEventId(Long eventId);
 
     long countByEventId(Long eventId);
+
+    @Modifying
+    @Transactional
+    @Query("delete from EventRegistration r where r.user.id = :userId")
+    int deleteByUserId(Long userId);
 }
