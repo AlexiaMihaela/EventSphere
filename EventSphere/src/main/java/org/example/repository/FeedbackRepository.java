@@ -21,4 +21,9 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     @Transactional
     @Query("delete from Feedback f where f.user.id = :userId")
     int deleteByUserId(Long userId);
+
+    @Modifying
+    @Transactional
+    @Query("delete from Feedback f where f.session.id = :sessionId")
+    int deleteBySessionId(Long sessionId);
 }

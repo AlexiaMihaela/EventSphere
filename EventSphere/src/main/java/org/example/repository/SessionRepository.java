@@ -50,6 +50,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
     @Query("select s.id from Session s where s.event.id = :eventId")
     List<Long> findSessionIdsByEventId(Long eventId);
+    //CHECK THIS FUNCTON !!!!!!!!!!!
 
     @Modifying
     @Transactional
@@ -65,6 +66,24 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
    order by s.startTime asc
 """)
     List<SessionResponse> findSessionResponsesByEventId(Long eventId);
+
+    @Query("""
+       select new org.example.dto.SessionResponse(
+          s.id, s.title, s.startTime, s.capacity, s.event.id
+       )
+       from Session s
+       where s.id = :sessionId
+    """)
+    SessionResponse findSessionResponseById(Long sessionId);
+
+    @Query("""
+       select new org.example.dto.SessionResponse(
+          s.id, s.title, s.startTime, s.capacity, s.event.id
+       )
+       from Session s
+       order by s.startTime asc
+    """)
+    List<SessionResponse> findAllSessionResponses();
 
 
 }

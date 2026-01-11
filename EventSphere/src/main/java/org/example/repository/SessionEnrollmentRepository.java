@@ -21,4 +21,9 @@ public interface SessionEnrollmentRepository extends JpaRepository<SessionEnroll
     @Transactional
     @Query("delete from SessionEnrollment e where e.user.id = :userId")
     int deleteByUserId(Long userId);
+
+    @Modifying
+    @Transactional
+    @Query("delete from SessionEnrollment e where e.session.id = :sessionId")
+    int deleteBySessionId(Long sessionId);
 }
