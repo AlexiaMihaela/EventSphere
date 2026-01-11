@@ -71,4 +71,25 @@ public class EventService {
         eventRepository.delete(event);
     }
 
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
+    }
+
+    public Event getEventById(Long id) {
+        return eventRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found: " + id));
+    }
+
+    public Event updateEvent(Long id, Event incoming) {
+        Event existing = eventRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found: " + id));
+
+        existing.setName(incoming.getName());
+        existing.setLocation(incoming.getLocation());
+        existing.setEventDate(incoming.getEventDate());
+        existing.setMaxParticipants(incoming.getMaxParticipants());
+
+        return eventRepository.save(existing);
+    }
+
 }
