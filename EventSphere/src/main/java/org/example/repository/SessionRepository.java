@@ -17,7 +17,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     List<Session> findByEventId(Long eventId);
 
     @Query("""
-        select new org.example.controller.dto.analytics.SessionAttendanceRow(
+        select new org.example.dto.analytics.SessionAttendanceRow(
             s.id, s.title, s.startTime, count(e.id)
         )
         from Session s
@@ -31,7 +31,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
     // Analytics 2: top sessions by enrollments + avg rating + feedback count
     @Query("""
-        select new org.example.controller.dto.analytics.SessionPerformanceRow(
+        select new org.example.dto.analytics.SessionPerformanceRow(
             s.id,
             s.title,
             s.startTime,
@@ -57,7 +57,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     int deleteByEventId(Long eventId);
 
     @Query("""
-   select new org.example.controller.dto.SessionResponse(
+   select new org.example.dto.SessionResponse(
       s.id, s.title, s.startTime, s.capacity, s.event.id
    )
    from Session s
