@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.dto.AddFeedbackRequest;
+import org.example.dto.FeedbackResponse;
 import org.example.model.Feedback;
 import org.example.model.Session;
 import org.example.model.User;
@@ -10,6 +11,8 @@ import org.example.repository.SessionRepository;
 import org.example.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class FeedbackService {
@@ -55,5 +58,14 @@ public class FeedbackService {
         fb.setComment(req.comment);
 
         return feedbackRepository.save(fb);
+    }
+
+    public List<FeedbackResponse> getBySession(Long sessionId) {
+        return feedbackRepository.findFeedbackResponsesBySessionId(sessionId);
+    }
+
+    public List<FeedbackResponse> getByUser(Long userId) {
+        return feedbackRepository.findFeedbackResponsesByUserId(userId);
+
     }
 }
