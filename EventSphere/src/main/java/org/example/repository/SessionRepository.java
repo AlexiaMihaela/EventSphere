@@ -29,7 +29,6 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     """)
     List<SessionAttendanceRow> findLowAttendanceSessions(Long eventId, long threshold);
 
-    // Analytics 2: top sessions by enrollments + avg rating + feedback count
     @Query("""
         select new org.example.dto.analytics.SessionPerformanceRow(
             s.id,
@@ -50,7 +49,6 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
 
     @Query("select s.id from Session s where s.event.id = :eventId")
     List<Long> findSessionIdsByEventId(Long eventId);
-    //CHECK THIS FUNCTON !!!!!!!!!!!
 
     @Modifying
     @Transactional
