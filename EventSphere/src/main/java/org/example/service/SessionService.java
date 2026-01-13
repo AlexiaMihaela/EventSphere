@@ -89,7 +89,6 @@ public class SessionService {
         Session existing = sessionRepository.findById(sessionId)
                 .orElseThrow(() -> new IllegalArgumentException("Session not found: " + sessionId));
 
-        // delete children first
         feedbackRepository.deleteBySessionId(sessionId);
         enrollmentRepository.deleteBySessionId(sessionId);
 

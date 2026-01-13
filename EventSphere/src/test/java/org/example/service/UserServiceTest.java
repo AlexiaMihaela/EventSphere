@@ -29,23 +29,19 @@ class UserServiceTest {
 
     @Test
     void create_whenEmailFree_shouldSaveUser() {
-        // given
         CreateUserRequest req = new CreateUserRequest();
         req.fullName = "Ana Pop";
         req.email = "ana@test.com";
 
         when(userRepository.findByEmailIgnoreCase("ana@test.com")).thenReturn(Optional.empty());
 
-        // user salvat (fără setId, nu contează aici)
         User saved = mock(User.class);
         when(userRepository.save(any(User.class))).thenReturn(saved);
 
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
-        // when
         User result = userService.create(req);
 
-        // then
         assertSame(saved, result);
 
         verify(userRepository).findByEmailIgnoreCase("ana@test.com");
@@ -60,7 +56,7 @@ class UserServiceTest {
 
     @Test
     void create_whenEmailExists_shouldThrow() {
-        // given
+
         CreateUserRequest req = new CreateUserRequest();
         req.fullName = "Ana Pop";
         req.email = "ana@test.com";
@@ -68,7 +64,6 @@ class UserServiceTest {
         User existing = mock(User.class);
         when(userRepository.findByEmailIgnoreCase("ana@test.com")).thenReturn(Optional.of(existing));
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> userService.create(req));
 
@@ -81,7 +76,7 @@ class UserServiceTest {
 
     @Test
     void update_whenEmailTakenByOtherUser_shouldThrow() {
-        // given
+
         Long id = 1L;
 
         UpdateUserRequest req = new UpdateUserRequest();
@@ -91,12 +86,10 @@ class UserServiceTest {
         User existing = mock(User.class);
         when(userRepository.findById(id)).thenReturn(Optional.of(existing));
 
-        // user cu același email, dar alt id => trebuie să arunce
         User other = mock(User.class);
         when(other.getId()).thenReturn(2L);
         when(userRepository.findByEmailIgnoreCase("taken@test.com")).thenReturn(Optional.of(other));
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> userService.update(id, req));
 
@@ -110,16 +103,14 @@ class UserServiceTest {
 
     @Test
     void deleteCascade_shouldDeleteChildrenThenUser() {
-        // given
+
         Long userId = 5L;
 
         User user = mock(User.class);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
-        // when
         userService.deleteCascade(userId);
 
-        // then: ordine corectă
         InOrder inOrder = inOrder(userRepository, feedbackRepository, enrollmentRepository, registrationRepository);
 
         inOrder.verify(userRepository).findById(userId);

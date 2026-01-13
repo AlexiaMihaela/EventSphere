@@ -30,7 +30,6 @@ class UserControllerTest {
         req.fullName = "Ana Pop";
         req.email = "ana@test.com";
 
-        // nu avem setId => folosim mock și simulăm getter-ele
         User resp = mock(User.class);
         when(resp.getId()).thenReturn(1L);
         when(resp.getFullName()).thenReturn("Ana Pop");

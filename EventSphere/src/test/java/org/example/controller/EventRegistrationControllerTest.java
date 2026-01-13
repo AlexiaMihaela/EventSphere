@@ -29,7 +29,6 @@ class EventRegistrationControllerTest {
         req.eventId = 10L;
         req.userId = 20L;
 
-        // Entity returnată: nu ne trebuie câmpuri, doar să fie JSON ok.
         EventRegistration resp = new EventRegistration();
         when(registrationService.register(any(RegisterToEventRequest.class))).thenReturn(resp);
 

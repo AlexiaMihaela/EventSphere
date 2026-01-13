@@ -39,18 +39,15 @@ public class SessionEnrollmentService {
 
         Long eventId = session.getEvent().getId();
 
-        // regula 1: user trebuie să fie registered la event
         boolean registered = registrationRepository.existsByEventIdAndUserId(eventId, user.getId());
         if (!registered) {
             throw new IllegalArgumentException("User must be registered to the event before enrolling in a session");
         }
 
-        // regula 2: nu te înscrii de 2 ori la aceeași sesiune
         if (enrollmentRepository.existsBySessionIdAndUserId(session.getId(), user.getId())) {
             throw new IllegalArgumentException("User already enrolled in this session");
         }
 
-        // regula 3: capacity
         long enrolledCount = enrollmentRepository.countBySessionId(session.getId());
         if (enrolledCount >= session.getCapacity()) {
             throw new IllegalArgumentException("Session is full");

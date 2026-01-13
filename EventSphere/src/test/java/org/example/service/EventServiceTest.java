@@ -25,14 +25,13 @@ class EventServiceTest {
 
     @InjectMocks private EventService eventService;
 
-    // 1) createEvent - cel mai simplu test (save + return)
     @Test
     void createEvent_shouldSaveAndReturn() {
         Event input = new Event();
-        input.setName("JavaConf");
+        input.setName("aaaaaaaaaaaa");
 
         Event saved = new Event();
-        saved.setName("JavaConf");
+        saved.setName("aaaaaaaaaaaa");
 
         when(eventRepository.save(input)).thenReturn(saved);
 
@@ -43,7 +42,6 @@ class EventServiceTest {
         verifyNoMoreInteractions(eventRepository, sessionRepository, registrationRepository, enrollmentRepository, feedbackRepository);
     }
 
-    // 2) getEventById - cazul important: not found
     @Test
     void getEventById_whenMissing_shouldThrow() {
         Long id = 99L;
@@ -57,7 +55,6 @@ class EventServiceTest {
         verifyNoMoreInteractions(eventRepository, sessionRepository, registrationRepository, enrollmentRepository, feedbackRepository);
     }
 
-    // 3) updateEvent - verifici că face mapping corect și dă save(existing)
     @Test
     void updateEvent_shouldCopyFieldsAndSave() {
         Long id = 1L;
@@ -75,7 +72,7 @@ class EventServiceTest {
         incoming.setMaxParticipants(100);
 
         when(eventRepository.findById(id)).thenReturn(Optional.of(existing));
-        when(eventRepository.save(existing)).thenAnswer(inv -> inv.getArgument(0)); // returnează exact obiectul salvat
+        when(eventRepository.save(existing)).thenAnswer(inv -> inv.getArgument(0));
 
         Event result = eventService.updateEvent(id, incoming);
 

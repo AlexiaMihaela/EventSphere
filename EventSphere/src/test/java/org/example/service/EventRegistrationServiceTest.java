@@ -28,7 +28,6 @@ class EventRegistrationServiceTest {
 
     @Test
     void register_happyPath_shouldSaveRegistration() {
-        // given
         RegisterToEventRequest req = new RegisterToEventRequest();
         req.eventId = 10L;
         req.userId = 20L;
@@ -51,10 +50,8 @@ class EventRegistrationServiceTest {
 
         ArgumentCaptor<EventRegistration> captor = ArgumentCaptor.forClass(EventRegistration.class);
 
-        // when
         EventRegistration result = registrationService.register(req);
 
-        // then
         assertSame(saved, result);
 
         verify(registrationRepository).save(captor.capture());

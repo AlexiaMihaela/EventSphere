@@ -20,6 +20,6 @@ public class CreateSessionRequest {
     @Min(1)
     public Integer capacity;
 
-    @NotNull
+    @NotNull(message="eventId is required")
     public Long eventId;
 }

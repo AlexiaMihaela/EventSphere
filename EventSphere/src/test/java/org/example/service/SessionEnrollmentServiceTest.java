@@ -31,7 +31,7 @@ class SessionEnrollmentServiceTest {
 
     @Test
     void enroll_happyPath_shouldSaveEnrollment() {
-        // given
+
         EnrollToSessionRequest req = new EnrollToSessionRequest();
         req.sessionId = 10L;
         req.userId = 20L;
@@ -59,10 +59,8 @@ class SessionEnrollmentServiceTest {
 
         ArgumentCaptor<SessionEnrollment> captor = ArgumentCaptor.forClass(SessionEnrollment.class);
 
-        // when
         SessionEnrollment result = enrollmentService.enroll(req);
 
-        // then
         assertSame(saved, result);
 
         verify(enrollmentRepository).save(captor.capture());
@@ -80,7 +78,7 @@ class SessionEnrollmentServiceTest {
 
     @Test
     void enroll_whenAlreadyEnrolled_shouldThrow() {
-        // given
+
         EnrollToSessionRequest req = new EnrollToSessionRequest();
         req.sessionId = 10L;
         req.userId = 20L;
@@ -101,7 +99,6 @@ class SessionEnrollmentServiceTest {
         when(registrationRepository.existsByEventIdAndUserId(1L, 20L)).thenReturn(true);
         when(enrollmentRepository.existsBySessionIdAndUserId(10L, 20L)).thenReturn(true);
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> enrollmentService.enroll(req));
 
@@ -113,7 +110,7 @@ class SessionEnrollmentServiceTest {
 
     @Test
     void enroll_whenSessionFull_shouldThrow() {
-        // given
+
         EnrollToSessionRequest req = new EnrollToSessionRequest();
         req.sessionId = 10L;
         req.userId = 20L;
@@ -136,7 +133,6 @@ class SessionEnrollmentServiceTest {
         when(enrollmentRepository.existsBySessionIdAndUserId(10L, 20L)).thenReturn(false);
         when(enrollmentRepository.countBySessionId(10L)).thenReturn(2L); // full
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> enrollmentService.enroll(req));
 

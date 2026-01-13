@@ -7,8 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +40,8 @@ public class Event {
         return sessions;
     }
 
-    // constructor gol (OBLIGATORIU pt JPA)
     public Event() {}
 
-    // getters & setters
     public Long getId() {
         return id;
     }

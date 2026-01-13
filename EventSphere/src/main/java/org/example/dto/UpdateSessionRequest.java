@@ -20,6 +20,4 @@ public class UpdateSessionRequest {
     @Min(value = 1, message = "capacity must be at least 1")
     public Integer capacity;
 
-    // opțional: dacă vrei să permiți mutarea sesiunii în alt event
-    // public Long eventId;
 }

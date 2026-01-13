@@ -55,7 +55,6 @@ public class UserService {
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + id));
 
-        // dacă schimbă email-ul, verificăm duplicat
         userRepository.findByEmailIgnoreCase(req.email)
                 .ifPresent(u -> {
                     if (!u.getId().equals(id)) {
@@ -74,12 +73,10 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
 
-        // 1) delete dependent rows first
         feedbackRepository.deleteByUserId(userId);
         enrollmentRepository.deleteByUserId(userId);
         registrationRepository.deleteByUserId(userId);
 
-        // 2) delete user
         userRepository.delete(user);
     }
 

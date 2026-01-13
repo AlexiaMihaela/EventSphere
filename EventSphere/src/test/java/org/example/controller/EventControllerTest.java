@@ -33,7 +33,7 @@ class EventControllerTest {
 
     @Test
     void createEvent_shouldReturnEventJson() throws Exception {
-        // given
+
         Event event = new Event();
         event.setName("JavaConf");
         event.setLocation("Bucharest");
@@ -53,11 +53,10 @@ class EventControllerTest {
 
     @Test
     void getEventById_whenMissing_shouldReturn400AndMessage() throws Exception {
-        // given
+
         when(eventService.getEventById(99L))
                 .thenThrow(new IllegalArgumentException("Event not found: 99"));
 
-        // when + then
         mockMvc.perform(get("/events/{id}", 99L))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Event not found: 99"));

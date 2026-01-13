@@ -28,7 +28,7 @@ class AnalyticsServiceTest {
 
     @Test
     void getEventOccupancy_shouldCalculateCorrectly() {
-        // given
+
         Long eventId = 1L;
 
         Event event = mock(Event.class);
@@ -37,10 +37,8 @@ class AnalyticsServiceTest {
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
         when(registrationRepository.countByEventId(eventId)).thenReturn(25L);
 
-        // when
         OccupancyResponse resp = analyticsService.getEventOccupancy(eventId);
 
-        // then
         assertEquals(1L, resp.eventId);
         assertEquals(25L, resp.registrations);
         assertEquals(100, resp.maxParticipants);
@@ -68,7 +66,6 @@ class AnalyticsServiceTest {
 
     @Test
     void topSessions_shouldRespectLimit() {
-        // given
         Long eventId = 1L;
 
         SessionPerformanceRow r1 = mock(SessionPerformanceRow.class);
@@ -78,10 +75,8 @@ class AnalyticsServiceTest {
         when(sessionRepository.findTopSessionPerformance(eventId))
                 .thenReturn(List.of(r1, r2, r3));
 
-        // when
         List<SessionPerformanceRow> result = analyticsService.topSessions(eventId, 2);
 
-        // then
         assertEquals(2, result.size());
         assertSame(r1, result.get(0));
         assertSame(r2, result.get(1));

@@ -31,10 +31,8 @@ class SessionServiceTest {
 
     @Test
     void create_whenEventExists_shouldSaveAndReturnResponse() {
-        // given
         Long eventId = 1L;
 
-        // Event fără setId(): simulăm doar getId()
         Event event = mock(Event.class);
         when(event.getId()).thenReturn(eventId);
 
@@ -46,10 +44,8 @@ class SessionServiceTest {
 
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
 
-        // Capturăm ce se trimite la save()
         ArgumentCaptor<Session> captor = ArgumentCaptor.forClass(Session.class);
 
-        // Session salvată: iarăși fără setId(), simulăm getId()
         Session saved = mock(Session.class);
         when(saved.getId()).thenReturn(10L);
         when(saved.getTitle()).thenReturn(req.title);
@@ -58,17 +54,14 @@ class SessionServiceTest {
 
         when(sessionRepository.save(any(Session.class))).thenReturn(saved);
 
-        // when
         SessionResponse resp = sessionService.create(req);
 
-        // then: response
         assertEquals(10L, resp.id);
         assertEquals("Intro Spring", resp.title);
         assertEquals(req.startTime, resp.startTime);
         assertEquals(30, resp.capacity);
         assertEquals(1L, resp.eventId);
 
-        // then: ce s-a salvat
         verify(sessionRepository).save(captor.capture());
         Session toSave = captor.getValue();
 
@@ -83,7 +76,7 @@ class SessionServiceTest {
 
     @Test
     void create_whenEventMissing_shouldThrow() {
-        // given
+
         CreateSessionRequest req = new CreateSessionRequest();
         req.eventId = 99L;
         req.title = "X";
@@ -92,7 +85,6 @@ class SessionServiceTest {
 
         when(eventRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> sessionService.create(req));
 
@@ -104,11 +96,10 @@ class SessionServiceTest {
 
     @Test
     void getById_whenMissing_shouldThrow() {
-        // given
+
         Long sessionId = 77L;
         when(sessionRepository.findSessionResponseById(sessionId)).thenReturn(null);
 
-        // when + then
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
                 () -> sessionService.getById(sessionId));
 
@@ -121,16 +112,14 @@ class SessionServiceTest {
 
     @Test
     void deleteCascade_shouldDeleteChildrenThenSession() {
-        // given
+
         Long sessionId = 5L;
 
         Session existing = mock(Session.class);
         when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(existing));
 
-        // when
         sessionService.deleteCascade(sessionId);
 
-        // then: ordine corectă
         InOrder inOrder = inOrder(sessionRepository, feedbackRepository, enrollmentRepository);
 
         inOrder.verify(sessionRepository).findById(sessionId);

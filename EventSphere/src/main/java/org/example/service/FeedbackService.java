@@ -40,13 +40,11 @@ public class FeedbackService {
         User user = userRepository.findById(req.userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + req.userId));
 
-        // regula 1: user trebuie să fie enrolled la sesiune
         boolean enrolled = enrollmentRepository.existsBySessionIdAndUserId(session.getId(), user.getId());
         if (!enrolled) {
             throw new IllegalArgumentException("User must be enrolled in the session to leave feedback");
         }
 
-        // regula 2: feedback o singură dată per user+session
         if (feedbackRepository.existsBySessionIdAndUserId(session.getId(), user.getId())) {
             throw new IllegalArgumentException("Feedback already submitted for this session by this user");
         }

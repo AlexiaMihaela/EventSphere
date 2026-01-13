@@ -51,14 +51,12 @@ public class EventService {
 
     @Transactional
     public void deleteEventCascade(Long eventId) {
-        // 1) check event exists
+
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("Event not found: " + eventId));
 
-        // 2) ia sessionIds
         var sessionIds = sessionRepository.findSessionIdsByEventId(eventId);
 
-        // 3) sterge copii in ordinea corecta (FK safe)
         if (!sessionIds.isEmpty()) {
             feedbackRepository.deleteBySessionIds(sessionIds);
             enrollmentRepository.deleteBySessionIds(sessionIds);
@@ -67,7 +65,6 @@ public class EventService {
         sessionRepository.deleteByEventId(eventId);
         registrationRepository.deleteByEventId(eventId);
 
-        // 4) sterge event
         eventRepository.delete(event);
     }
 
