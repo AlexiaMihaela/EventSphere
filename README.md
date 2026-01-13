@@ -1,64 +1,59 @@
-# EventSphere 
+EventSphere
+1. Prezentare generală a sistemului
 
-## 1. System Overview
+EventSphere este o platformă concepută pentru gestionarea și analizarea evenimentelor precum conferințe, workshop-uri și festivaluri. Sistemul permite organizatorilor să creeze evenimente și sesiuni, utilizatorilor să se înregistreze și să participe, iar administratorilor să analizeze participarea, feedback-ul și indicatorii de performanță. Aplicația se concentrează nu doar pe managementul operațional, ci și pe analiză și generarea de insight-uri, fiind potrivită pentru un proiect de nivel master.
 
-EventSphere is a platform designed to manage and analyze events such as conferences, workshops, and festivals. The system allows organizers to create events and sessions, users to register and participate, and administrators to analyze participation, feedback, and performance metrics. The application focuses not only on operational management but also on analytics and insights, making it suitable for a master-level project.
+2. Cerințe de business
 
----
+Sistemul trebuie să permită organizatorilor să creeze, actualizeze și șteargă evenimente.
 
-## 2. Business Domain
+Fiecare eveniment trebuie să suporte mai multe sesiuni programate la intervale orare specifice.
 
-The business domain of the application is **event organization and participation management**, combined with **data analytics** regarding attendance, session popularity, and user feedback.
+Utilizatorii trebuie să se poată înregistra la evenimente.
 
----
+Utilizatorii trebuie să se poată înscrie la sesiuni individuale din cadrul unui eveniment.
 
-## 3. Business Requirements (10)
+Sistemul trebuie să gestioneze speakerii alocați sesiunilor.
 
-1. The system must allow organizers to create, update, and delete events.
-2. Each event must support multiple sessions scheduled at specific times.
-3. Users must be able to register for events.
-4. Users must be able to enroll in individual sessions of an event.
-5. The system must manage speakers assigned to sessions.
-6. The system must prevent registrations or enrollments when capacity limits are exceeded.
-7. Participants must be able to leave feedback and ratings for sessions they attended.
-8. The system must calculate and expose the occupancy rate of events.
-9. The system must identify sessions with low attendance.
-10. All data must be persisted in a relational database and support analytical queries.
+Sistemul trebuie să prevină înregistrările sau înscrierile atunci când capacitatea maximă este depășită.
 
----
+Participanții trebuie să poată lăsa feedback și evaluări pentru sesiunile la care au participat.
 
-## 4. MVP – Minimum Viable Product Features (5)
+Sistemul trebuie să calculeze și să expună rata de ocupare a evenimentelor.
 
-### 4.1 Event Management
+Sistemul trebuie să identifice sesiunile cu participare scăzută.
 
-Organizers can create and manage events, including details such as title, location, period, and maximum capacity.
+Toate datele trebuie persistate într-o bază de date relațională și să suporte interogări analitice.
 
-### 4.2 Session Management
+3. MVP – Funcționalități de bază 
+3.1 Managementul evenimentelor
 
-Each event can contain multiple sessions, each having a defined schedule, speaker, and capacity.
+Organizatorii pot crea și gestiona evenimente, incluzând detalii precum titlu, locație, perioadă și capacitate maximă.
 
-### 4.3 Registration & Enrollment
+3.2 Managementul sesiunilor
 
-Users can register for events and enroll in specific sessions, with validation to ensure capacity constraints are respected.
+Fiecare eveniment poate conține mai multe sesiuni, fiecare având un program definit, speaker și capacitate.
 
-### 4.4 Feedback & Rating System
+3.3 Înregistrare și înscriere
 
-Participants can submit feedback and ratings for sessions they attended, enabling quality assessment.
+Utilizatorii se pot înregistra la evenimente și se pot înscrie la sesiuni specifice, cu validare pentru respectarea limitelor de capacitate.
 
-### 4.5 Analytics & Reporting
+3.4 Sistem de feedback și evaluare
 
-The system provides analytical insights such as event occupancy rate, most popular sessions, and sessions with low attendance.
+Participanții pot trimite feedback și rating-uri pentru sesiunile la care au participat, permițând evaluarea calității.
 
----
+3.5 Analiză și raportare
 
-## 5. MVP Scope Notes
+Sistemul oferă insight-uri analitice precum rata de ocupare a evenimentelor, cele mai populare sesiuni și sesiunile cu participare scăzută.
 
-* Authentication and authorization are kept minimal for the MVP.
-* The focus is on backend functionality and analytics rather than UI complexity.
-* The MVP is designed to be extensible for future enhancements.
+4. Note privind scopul MVP
 
----
+Autentificarea și autorizarea sunt menținute la un nivel minim pentru MVP.
 
-## 6. Conclusion
+Accentul este pus pe funcționalitatea backend și pe analiză, nu pe complexitatea UI.
 
-This document defines the foundation of the EventSphere project. It serves as the reference point for implementation decisions and ensures alignment with the project requirements and evaluation criteria.
+MVP-ul este conceput pentru a fi extensibil pentru îmbunătățiri viitoare.
+
+5. Concluzie
+
+Acest document definește fundația proiectului EventSphere. El servește ca punct de referință pentru deciziile de implementare și asigură alinierea cu cerințele proiectului și criteriile de evaluare.
